@@ -37,7 +37,7 @@ const markFav = (id) => {
     });
     m= m.filter((movie) =>{ return movie.Id ===id;});
     m=m[0];
-    var existingFav=JSON.parse(localStorage.getItem("fav"));
+    let existingFav=JSON.parse(localStorage.getItem("fav"));
     if(existingFav==null){
         const newfav = JSON.stringify([m])
         localStorage.setItem("fav", newfav);
@@ -57,16 +57,16 @@ return (
 
 <div>
 
-<Link to={`/fav`}><h2>Favorites</h2></Link>
+<Link to={`/fav`} id="fav"><h2>Favorites</h2></Link>
 
 <div className='search'>
 			<input
                 className="bar"
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
-				placeholder='Type movie name'
+				placeholder='Type movie name....'
 			></input>
-            <span>Search bar</span>
+            <span>Search</span>
 </div>
 
 
