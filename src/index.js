@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <>
- <h1> Movie World </h1>
+ <h1> CineVerse </h1>
   <BrowserRouter>
   <Routes>
     <Route path="/" element={<Home />} />

@@ -30,6 +30,17 @@ useEffect(() => {
 }, [searchValue]);
 
 
+function customPopup(message) {
+    let popup = document.getElementById('customPopup');
+    let popupMessage = document.getElementById('popupMessage');
+    popupMessage.innerHTML = message;
+    popup.style.display = 'block';
+
+    let closeBtn = document.querySelector('.close');
+    closeBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+}
 
 const markFav = (id) => {
     let m = movie.map((mov)=> {
@@ -37,18 +48,15 @@ const markFav = (id) => {
     });
     m= m.filter((movie) =>{ return movie.Id ===id;});
     m=m[0];
-    let existingFav=JSON.parse(localStorage.getItem("fav"));
-    if(existingFav==null){
-        const newfav = JSON.stringify([m])
-        localStorage.setItem("fav", newfav);
-    }
-    else{
-        
-        const newfav = JSON.stringify([...existingFav,m])
-        localStorage.setItem("fav", newfav);
-    }
-   
-    
+
+    let existingFav = JSON.parse(localStorage.getItem("fav")) || [];
+
+    if (existingFav.some((fav) => fav.Id === m.Id)) {
+        customPopup("Already in favorites!");
+    } else {
+        existingFav.push(m);
+        localStorage.setItem("fav", JSON.stringify(existingFav));
+    } 
 };
 
 
@@ -64,9 +72,8 @@ return (
                 className="bar"
 				value={searchValue}
 				onChange={(e) => setSearchValue(e.target.value)}
-				placeholder='Type movie name....'
+				placeholder='Search movies and shows here....'
 			></input>
-            <span>Search</span>
 </div>
 
 
@@ -74,15 +81,15 @@ return (
 { movie.map((movie)=> {
     return (
 
-    <div class="mainmovie">
-    <div class="row d-flex align-items-center mt-4 mb-4">
-    <div className='image-container d-flex justify-content-start m-3'>
+    <div className="mainmovie">
+    <div className="row d-flex align-items-center mt-4 mb-4">
+    <div className='image-container d-flex m-3'>
     <Link to={`/about/${movie.Id}`}><img src={movie.image} alt={movie.title} /></Link>
    
     </div>
     </div>
-    <input type="checkbox" onChange={()=> markFav(movie.Id)} />Add To Favorites
-    <h3>{movie.title}</h3>
+    <button id ="fav-btn" onClick={()=> markFav(movie.Id)}>Add To Favorites</button>
+    <h3 id = "title">{movie.title}</h3>
     
     </div>
 
@@ -90,7 +97,15 @@ return (
 })}
 
 </p>
+<div id="customPopup" className="popup">
+    <div className="popup-content">
+        <span className="close">&times;</span>
+        <p id="popupMessage"></p>
+    </div>
 </div>
+
+</div>
+
 )
 }
 
