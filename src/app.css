@@ -20,7 +20,6 @@
  
   .moviedetails{
        justify-content:space-around;
-       background-color:whitesmoke;
        width:100%;
        display:flex;
        flex-direction:row;
@@ -36,12 +35,12 @@
   #year{
     font-weight: bold;
     padding-left: 15px;
-    color:rgb(159, 24, 58);
+    color:black;
     font-family:cursive;
   }
    
   #year span{
-    color:rgb(220, 187, 20);
+    color:cornflowerblue;
   }
   #title{
     color:crimson;
@@ -123,16 +122,18 @@
   text-align:left;
   color:cornflowerblue;
   font-weight:bold;
-  font-size:25px;
+  font-size:30px;
   font-family:cursive;
+  text-decoration: underline;
 }
 
 #home{
   border: none;
-  color: cornflowerblue;
-  padding: 12px 16px;
-  font-size: 20px;
+  color: Coral;
+  padding: 12px 12px;
+  font-size: 23px;
   cursor: pointer;
+  align-self: right;
 }
 
 #home:hover {
@@ -143,7 +144,8 @@
 #fav{
   font-size: 18px;
   font-family: cursive;
-  color:cornflowerblue;
+  color:coral;
+  text-align: right;
 }
 
 #fav:hover{
